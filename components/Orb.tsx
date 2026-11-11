@@ -43,7 +43,7 @@ const vertex = /* glsl */ `
     vMix = smoothstep(-0.6, 0.8, n + p.y * 0.4);
     vec4 mv = modelViewMatrix * vec4(p, 1.0);
     gl_Position = projectionMatrix * mv;
-    gl_PointSize = (2.2 + aRand * 2.6 + max(n, 0.0) * 4.0) * (3.2 / -mv.z);
+    gl_PointSize = (2.7 + aRand * 2.8 + max(n, 0.0) * 4.0) * (3.2 / -mv.z);
     vAlpha = 0.35 + 0.65 * smoothstep(-1.2, 1.2, p.z + n);
   }
 `
@@ -65,22 +65,30 @@ const fragment = /* glsl */ `
 
 function Particles({ count, calm }: { count: number; calm: boolean }) {
   const ref = useRef<THREE.Points>(null)
-  const { size } = useThree()
+  const { size, setDpr } = useThree()
   const mouse = useRef({ x: 0, y: 0, tx: 0, ty: 0 })
   const pulse = useRef(0)
+  const quality = useRef({ frames: 0, time: 0, level: 0 })
 
   const [positions, rands] = useMemo(() => {
     const pos = new Float32Array(count * 3)
     const rnd = new Float32Array(count)
     const golden = Math.PI * (3 - Math.sqrt(5))
+    // ordem embaralhada: cortar o fim do buffer (qualidade baixa) tira pontos da esfera toda, não só de baixo
+    const slot = Array.from({ length: count }, (_, i) => i)
+    for (let i = count - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1))
+      ;[slot[i], slot[j]] = [slot[j], slot[i]]
+    }
     for (let i = 0; i < count; i++) {
       const y = 1 - (i / (count - 1)) * 2
       const r = Math.sqrt(1 - y * y)
       const t = golden * i
-      pos[i * 3] = Math.cos(t) * r
-      pos[i * 3 + 1] = y
-      pos[i * 3 + 2] = Math.sin(t) * r
-      rnd[i] = Math.random()
+      const k = slot[i]
+      pos[k * 3] = Math.cos(t) * r
+      pos[k * 3 + 1] = y
+      pos[k * 3 + 2] = Math.sin(t) * r
+      rnd[k] = Math.random()
     }
     return [pos, rnd]
   }, [count])
@@ -118,6 +126,22 @@ function Particles({ count, calm }: { count: number; calm: boolean }) {
   useFrame((_, dt) => {
     const pts = ref.current
     if (!pts) return
+    // Qualidade adaptativa: mede ~1 s de quadros; se ficar abaixo de ~50 fps, baixa a resolução
+    // e depois corta partículas. Nunca sobe de volta (evita ficar oscilando).
+    const q = quality.current
+    if (q.level < 2) {
+      q.frames++
+      q.time += Math.min(dt, 0.1)
+      if (q.frames >= 60) {
+        if (q.time / q.frames > 1 / 50) {
+          q.level++
+          if (q.level === 1) setDpr(1)
+          else pts.geometry.setDrawRange(0, Math.floor(count * 0.55))
+        }
+        q.frames = 0
+        q.time = 0
+      }
+    }
     const m = mouse.current
     m.x += (m.tx - m.x) * 0.04
     m.y += (m.ty - m.y) * 0.04
@@ -159,10 +183,10 @@ function Particles({ count, calm }: { count: number; calm: boolean }) {
 }
 
 export default function Orb({ calm = false }: { calm?: boolean }) {
-  const count = typeof window !== 'undefined' && window.innerWidth < 768 ? 5000 : 11000
+  const count = typeof window !== 'undefined' && window.innerWidth < 768 ? 3500 : 7000
   return (
     <div className="pointer-events-none fixed inset-0 z-0" aria-hidden>
-      <Canvas camera={{ position: [0, 0, 4.2], fov: 45 }} dpr={[1, 1.75]} gl={{ antialias: false, alpha: true, powerPreference: 'high-performance' }}>
+      <Canvas camera={{ position: [0, 0, 4.2], fov: 45 }} dpr={[1, 1.25]} gl={{ antialias: false, alpha: true, powerPreference: 'high-performance' }}>
         <Particles count={count} calm={calm} />
       </Canvas>
     </div>

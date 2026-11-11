@@ -18,7 +18,7 @@ function Row({ reverse }: { reverse?: boolean }) {
 
 export default function Marquee() {
   return (
-    <section aria-label="Tecnologias" className="relative -rotate-2 border-y border-white/10 bg-[var(--bg)]/80 py-6 backdrop-blur-sm md:py-8">
+    <section aria-label="Tecnologias" className="relative -rotate-2 border-y border-white/10 bg-[var(--bg)] py-6 md:py-8">
       <Row />
       <div className="h-3 md:h-4" />
       <Row reverse />

@@ -262,7 +262,7 @@ export function TerminalWindow({ embedded = false, autoplay, commits, onClose, c
   return (
     <div ref={root} className={className}>
       <div
-        className="overflow-hidden rounded-2xl border border-white/12 bg-[#0b0b12]/90 shadow-[0_50px_140px_-40px_var(--accent)] backdrop-blur-xl"
+        className="overflow-hidden rounded-2xl border border-white/12 bg-[#0b0b12] shadow-[0_40px_90px_-40px_var(--accent)]"
         onClick={() => {
           takeOver()
           input.current?.focus({ preventScroll: true })
@@ -420,7 +420,7 @@ export default function TerminalOverlay({ commits }: { commits: number }) {
     <AnimatePresence>
       {open && (
         <motion.div
-          className="fixed inset-0 z-[85] flex items-end justify-center bg-black/50 p-3 backdrop-blur-sm md:items-center"
+          className="fixed inset-0 z-[85] flex items-end justify-center bg-black/75 p-3 md:items-center"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
