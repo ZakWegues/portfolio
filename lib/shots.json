@@ -1,0 +1,198 @@
+{
+ "elysium": [
+  {
+   "src": "/projects/elysium/inicio.webp",
+   "w": 1800,
+   "h": 1125,
+   "mobile": false
+  },
+  {
+   "src": "/projects/elysium/chat.webp",
+   "w": 1800,
+   "h": 1125,
+   "mobile": false
+  },
+  {
+   "src": "/projects/elysium/hoje.webp",
+   "w": 1800,
+   "h": 1125,
+   "mobile": false
+  },
+  {
+   "src": "/projects/elysium/central.webp",
+   "w": 1800,
+   "h": 1125,
+   "mobile": false
+  },
+  {
+   "src": "/projects/elysium/ajustes.webp",
+   "w": 1800,
+   "h": 1125,
+   "mobile": false
+  }
+ ],
+ "elysium-m": [
+  {
+   "src": "/projects/elysium-m/conta.webp",
+   "w": 780,
+   "h": 1149,
+   "mobile": true
+  },
+  {
+   "src": "/projects/elysium-m/flashcards.webp",
+   "w": 780,
+   "h": 784,
+   "mobile": true
+  },
+  {
+   "src": "/projects/elysium-m/checklist.webp",
+   "w": 780,
+   "h": 1090,
+   "mobile": true
+  },
+  {
+   "src": "/projects/elysium-m/cronograma.webp",
+   "w": 780,
+   "h": 1069,
+   "mobile": true
+  },
+  {
+   "src": "/projects/elysium-m/roteiro.webp",
+   "w": 780,
+   "h": 764,
+   "mobile": true
+  },
+  {
+   "src": "/projects/elysium-m/gastos.webp",
+   "w": 780,
+   "h": 950,
+   "mobile": true
+  },
+  {
+   "src": "/projects/elysium-m/financiamento.webp",
+   "w": 780,
+   "h": 893,
+   "mobile": true
+  }
+ ],
+ "scrollyourbrain": [
+  {
+   "src": "/projects/scrollyourbrain/feed-aurora.webp",
+   "w": 540,
+   "h": 1169,
+   "mobile": true
+  },
+  {
+   "src": "/projects/scrollyourbrain/feed-quiz.webp",
+   "w": 540,
+   "h": 1169,
+   "mobile": true
+  },
+  {
+   "src": "/projects/scrollyourbrain/lesson.webp",
+   "w": 540,
+   "h": 1169,
+   "mobile": true
+  },
+  {
+   "src": "/projects/scrollyourbrain/explore.webp",
+   "w": 540,
+   "h": 1169,
+   "mobile": true
+  },
+  {
+   "src": "/projects/scrollyourbrain/modes.webp",
+   "w": 540,
+   "h": 1169,
+   "mobile": true
+  },
+  {
+   "src": "/projects/scrollyourbrain/profile.webp",
+   "w": 540,
+   "h": 1169,
+   "mobile": true
+  },
+  {
+   "src": "/projects/scrollyourbrain/library.webp",
+   "w": 540,
+   "h": 1169,
+   "mobile": true
+  }
+ ],
+ "manual-etec": [
+  {
+   "src": "/projects/manual-etec/dashboard.webp",
+   "w": 1800,
+   "h": 1125,
+   "mobile": false
+  },
+  {
+   "src": "/projects/manual-etec/schedule.webp",
+   "w": 1800,
+   "h": 1125,
+   "mobile": false
+  },
+  {
+   "src": "/projects/manual-etec/subjects.webp",
+   "w": 1800,
+   "h": 1125,
+   "mobile": false
+  },
+  {
+   "src": "/projects/manual-etec/ranking.webp",
+   "w": 1800,
+   "h": 1125,
+   "mobile": false
+  },
+  {
+   "src": "/projects/manual-etec/calendar.webp",
+   "w": 1800,
+   "h": 1125,
+   "mobile": false
+  },
+  {
+   "src": "/projects/manual-etec/focus.webp",
+   "w": 1800,
+   "h": 1125,
+   "mobile": false
+  },
+  {
+   "src": "/projects/manual-etec/landing.webp",
+   "w": 1800,
+   "h": 1125,
+   "mobile": false
+  },
+  {
+   "src": "/projects/manual-etec/dashboard-m.webp",
+   "w": 780,
+   "h": 1688,
+   "mobile": true
+  }
+ ],
+ "cashup": [
+  {
+   "src": "/projects/cashup/home.webp",
+   "w": 1800,
+   "h": 1125,
+   "mobile": false
+  },
+  {
+   "src": "/projects/cashup/cardapio.webp",
+   "w": 1800,
+   "h": 1125,
+   "mobile": false
+  },
+  {
+   "src": "/projects/cashup/home-m.webp",
+   "w": 780,
+   "h": 1688,
+   "mobile": true
+  },
+  {
+   "src": "/projects/cashup/cardapio-m.webp",
+   "w": 780,
+   "h": 1688,
+   "mobile": true
+  }
+ ]
+}
