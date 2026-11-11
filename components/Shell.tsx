@@ -6,7 +6,7 @@ import Lenis from 'lenis'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { AnimatePresence, motion } from 'motion/react'
-import Terminal from './Terminal'
+import TerminalOverlay from './Terminal'
 
 const Orb = dynamic(() => import('./Orb'), { ssr: false })
 
@@ -118,7 +118,7 @@ function Intro({ done }: { done: () => void }) {
   )
 }
 
-export default function Shell({ children }: { children: React.ReactNode }) {
+export default function Shell({ children, commits }: { children: React.ReactNode; commits: number }) {
   const reduced = useReducedMotion()
   const [intro, setIntro] = useState(true)
 
@@ -146,7 +146,7 @@ export default function Shell({ children }: { children: React.ReactNode }) {
     <>
       <Orb calm={reduced} />
       <Cursor />
-      <Terminal />
+      <TerminalOverlay commits={commits} />
       <AnimatePresence>{intro && <Intro done={() => setIntro(false)} />}</AnimatePresence>
       <div className="relative z-10">{children}</div>
     </>

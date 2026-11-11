@@ -33,45 +33,33 @@
  ],
  "elysium-m": [
   {
-   "src": "/projects/elysium-m/conta.webp",
+   "src": "/projects/elysium-m/inicio.webp",
    "w": 780,
-   "h": 1149,
+   "h": 1688,
    "mobile": true
   },
   {
-   "src": "/projects/elysium-m/flashcards.webp",
+   "src": "/projects/elysium-m/chat.webp",
    "w": 780,
-   "h": 784,
+   "h": 1688,
    "mobile": true
   },
   {
-   "src": "/projects/elysium-m/checklist.webp",
+   "src": "/projects/elysium-m/pc.webp",
    "w": 780,
-   "h": 1090,
+   "h": 1688,
    "mobile": true
   },
   {
-   "src": "/projects/elysium-m/cronograma.webp",
+   "src": "/projects/elysium-m/hoje.webp",
    "w": 780,
-   "h": 1069,
+   "h": 1688,
    "mobile": true
   },
   {
-   "src": "/projects/elysium-m/roteiro.webp",
+   "src": "/projects/elysium-m/ajustes.webp",
    "w": 780,
-   "h": 764,
-   "mobile": true
-  },
-  {
-   "src": "/projects/elysium-m/gastos.webp",
-   "w": 780,
-   "h": 950,
-   "mobile": true
-  },
-  {
-   "src": "/projects/elysium-m/financiamento.webp",
-   "w": 780,
-   "h": 893,
+   "h": 1688,
    "mobile": true
   }
  ],

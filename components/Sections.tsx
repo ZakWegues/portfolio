@@ -161,12 +161,12 @@ export function About() {
                 className="h-full rounded-full"
                 style={{ background: 'linear-gradient(90deg, var(--accent), var(--accent-2))' }}
                 initial={{ width: 0 }}
-                whileInView={{ width: '75%' }}
+                whileInView={{ width: `${Math.round((education.year / education.totalYears) * 100)}%` }}
                 viewport={{ once: true }}
                 transition={{ duration: 1.4, ease: [0.22, 1, 0.36, 1] }}
               />
             </div>
-            <div className="mt-2 font-mono text-[11px] text-white/40">3º de 4 anos</div>
+            <div className="mt-2 font-mono text-[11px] text-white/40">{education.year}º de {education.totalYears} anos</div>
           </Reveal>
 
           <Reveal className="glass rounded-3xl p-7" delay={0.18}>
@@ -247,7 +247,7 @@ export function Contact() {
       <footer className="mt-28 flex flex-col justify-between gap-4 border-t border-white/10 pt-6 font-mono text-xs text-white/40 md:flex-row">
         <span>© {new Date().getFullYear()} {person.name}</span>
         <span>
-          feito com Next.js, three.js e muito café · aperte <kbd className="rounded border border-white/20 px-1.5 py-0.5 text-white/70">&apos;</kbd> para o terminal
+          feito com Next.js, three.js e muito café · aperte <kbd className="rounded border border-white/20 px-1.5 py-0.5 text-white/70">&apos;</kbd> pra abrir o terminal em qualquer lugar
         </span>
       </footer>
     </section>

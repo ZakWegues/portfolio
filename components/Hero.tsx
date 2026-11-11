@@ -52,7 +52,7 @@ export function Nav() {
         ))}
       </nav>
       <button
-        onClick={() => window.dispatchEvent(new Event('open-terminal'))}
+        onClick={() => scrollToId('terminal')}
         className="glass rounded-full px-4 py-2 font-mono text-xs text-white/80 transition hover:text-white"
         data-cursor="hack"
         title="Abrir terminal (tecla ')"
