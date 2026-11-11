@@ -12,9 +12,9 @@ gsap.registerPlugin(ScrollTrigger)
 function Showcase({ p }: { p: Project }) {
   if (p.device === 'phone')
     return (
-      <div className="flex items-end justify-center gap-4 md:gap-6">
+      <div className="flex items-start justify-center gap-4 md:gap-6">
         <Phone shots={p.shots.slice(0, 4)} alt={p.name} className="w-[44%] max-w-[250px] -rotate-3" />
-        <Phone shots={p.shots.slice(4).concat(p.shots.slice(0, 1))} alt={p.name} className="w-[40%] max-w-[230px] translate-y-10 rotate-3" dots={false} />
+        <Phone shots={p.shots.slice(4).concat(p.shots.slice(0, 1))} alt={p.name} className="mt-10 w-[40%] max-w-[230px] rotate-3" dots={false} />
       </div>
     )
   return (
@@ -26,7 +26,7 @@ function Showcase({ p }: { p: Project }) {
           alt={p.device === 'duo' ? 'ELYSIUM-M' : `${p.name} mobile`}
           bg={p.device === 'duo' ? '#0b1220' : '#000'}
           dots={false}
-          className="absolute -bottom-2 right-0 w-[26%] min-w-[96px] rotate-[4deg]"
+          className="absolute -bottom-2 right-0 w-[29%] min-w-[110px] rotate-[4deg]"
         />
       )}
       {p.device === 'duo' && (
@@ -40,18 +40,49 @@ function Showcase({ p }: { p: Project }) {
   )
 }
 
+// Em telas baixas o painel encolhe para caber inteiro na altura (só no modo horizontal).
+function useFitHeight() {
+  const outer = useRef<HTMLElement>(null)
+  const inner = useRef<HTMLDivElement>(null)
+  const [scale, setScale] = useState(1)
+  useEffect(() => {
+    const o = outer.current
+    const i = inner.current
+    if (!o || !i) return
+    const measure = () => {
+      if (window.innerWidth < 1024) return setScale(1)
+      const cs = getComputedStyle(o)
+      const avail = o.clientHeight - parseFloat(cs.paddingTop) - parseFloat(cs.paddingBottom)
+      setScale(Math.min(1, avail / i.offsetHeight))
+    }
+    measure()
+    const ro = new ResizeObserver(measure)
+    ro.observe(i)
+    ro.observe(o)
+    return () => ro.disconnect()
+  }, [])
+  return { outer, inner, scale }
+}
+
 function Panel({ p, total }: { p: Project; total: number }) {
+  const { outer, inner, scale } = useFitHeight()
   return (
     <article
+      ref={outer}
       data-project={p.slug}
       data-a={p.color}
       data-b={p.color2}
-      className="project-panel relative flex w-full shrink-0 flex-col justify-center gap-10 px-5 py-20 md:px-10 lg:h-[100svh] lg:w-[100vw] lg:flex-row lg:items-center lg:gap-14 lg:px-16 lg:pb-6 lg:pt-20"
+      className="project-panel relative flex w-full shrink-0 flex-col justify-center px-5 py-20 md:px-10 lg:h-[100svh] lg:w-[100vw] lg:items-center lg:px-16 lg:pb-8 lg:pt-20"
     >
       <div
         className="pointer-events-none absolute inset-0 -z-10 opacity-40"
         style={{ background: `radial-gradient(60% 60% at 70% 50%, ${p.color}33, transparent 70%)` }}
       />
+      <div
+        ref={inner}
+        className="flex w-full flex-col gap-10 lg:flex-row lg:items-center lg:gap-14"
+        style={scale < 1 ? { transform: `scale(${scale})`, transformOrigin: 'center center' } : undefined}
+      >
       <div className="lg:w-[42%]">
         <div className="mb-5 flex items-center gap-4 font-mono text-xs uppercase tracking-[0.2em] text-white/50">
           <span style={{ color: p.color }}>
@@ -67,7 +98,7 @@ function Panel({ p, total }: { p: Project; total: number }) {
         <p className="mt-3 font-serif text-2xl italic text-white/90 md:text-3xl lg:text-2xl 2xl:text-3xl">{p.tagline}</p>
         <p className="mt-4 max-w-xl text-[15px] leading-relaxed text-white/65 lg:text-[13.5px] 2xl:text-[15px]">{p.description}</p>
 
-        <ul className="mt-5 space-y-1.5">
+        <ul className="mt-5 space-y-1.5 short:hidden">
           {p.highlights.map((h) => (
             <li key={h} className="flex gap-3 text-sm text-white/80 lg:text-[13px] 2xl:text-sm">
               <span className="mt-[7px] h-1.5 w-1.5 shrink-0 rotate-45" style={{ background: p.color }} />
@@ -115,6 +146,7 @@ function Panel({ p, total }: { p: Project; total: number }) {
       </div>
       <div className="pp-media lg:w-[58%]">
         <Showcase p={p} />
+      </div>
       </div>
     </article>
   )

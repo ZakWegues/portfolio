@@ -1,5 +1,8 @@
 @import "tailwindcss";
 
+/* desktop com tela baixa (notebook, zoom do Windows) */
+@custom-variant short (@media (min-width: 1024px) and (max-height: 760px));
+
 :root {
   --bg: #05050a;
   --fg: #f4f2ff;

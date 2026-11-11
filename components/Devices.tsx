@@ -31,7 +31,10 @@ function Dots({ n, i, set }: { n: number; i: number; set: (i: number) => void })
   )
 }
 
-function Slides({ shots, i, alt, fit }: { shots: Shot[]; i: number; alt: string; fit: 'cover' | 'top' }) {
+function Slides({ shots, i, alt, frame }: { shots: Shot[]; i: number; alt: string; frame: number }) {
+  // Print mais "largo" que a moldura: mostra inteiro na largura (sem cortar as laterais), alinhado no topo.
+  const s = shots[i]
+  const wide = s && s.w / s.h > frame + 0.02
   return (
     <AnimatePresence initial={false}>
       <motion.img
@@ -43,7 +46,7 @@ function Slides({ shots, i, alt, fit }: { shots: Shot[]; i: number; alt: string;
         loading="lazy"
         decoding="async"
         draggable={false}
-        className={`absolute inset-0 h-full w-full ${fit === 'top' ? 'object-cover object-top' : 'object-cover object-top'}`}
+        className={`absolute inset-x-0 bottom-0 w-full object-top ${wide ? 'top-[7%] h-[93%] object-contain' : 'top-0 h-full object-cover'}`}
         initial={{ opacity: 0, scale: 1.04 }}
         animate={{ opacity: 1, scale: 1 }}
         exit={{ opacity: 0 }}
@@ -60,7 +63,7 @@ export function Laptop({ shots, alt, active = true }: { shots: Shot[]; alt: stri
       <div className="relative mx-auto w-full" data-cursor="ver">
         <div className="rounded-t-[14px] border border-white/15 bg-[#111] p-[1.6%] shadow-[0_40px_120px_-30px_var(--accent)]">
           <div className="relative aspect-[16/10] overflow-hidden rounded-[6px] bg-black" onClick={() => setI((i + 1) % shots.length)}>
-            <Slides shots={shots} i={i} alt={alt} fit="cover" />
+            <Slides shots={shots} i={i} alt={alt} frame={16 / 10} />
           </div>
         </div>
         <div className="relative mx-[-6%] h-3 rounded-b-xl bg-gradient-to-b from-[#2a2a2e] to-[#0e0e10] md:h-4">
@@ -78,7 +81,7 @@ export function Phone({ shots, alt, active = true, className = '', bg = '#000', 
     <div className={className}>
       <div className="relative rounded-[2.6rem] border border-white/15 bg-[#0d0d10] p-[3.5%] shadow-[0_40px_100px_-30px_var(--accent-2)]" data-cursor="ver">
         <div className="relative aspect-[9/19.5] overflow-hidden rounded-[2.2rem]" style={{ background: bg }} onClick={() => setI((i + 1) % shots.length)}>
-          <Slides shots={shots} i={i} alt={alt} fit="top" />
+          <Slides shots={shots} i={i} alt={alt} frame={9 / 19.5} />
           <div className="absolute left-1/2 top-2 z-10 h-[3.2%] w-[28%] -translate-x-1/2 rounded-full bg-black" />
         </div>
       </div>
